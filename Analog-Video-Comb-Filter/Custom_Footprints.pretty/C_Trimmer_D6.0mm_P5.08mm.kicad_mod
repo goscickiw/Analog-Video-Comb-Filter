@@ -1,0 +1,91 @@
+(footprint "C_Trimmer_D6.0mm_P5.08mm" (version 20221018) (generator pcbnew)
+  (layer "F.Cu")
+  (descr "C, Trimmer, pin pitch=5.08mm, diameter=6.0mm")
+  (tags "C Trimmer Radial pin pitch 5.08mm diameter 6.0mm")
+  (attr through_hole)
+  (fp_text reference "REF**" (at 2.54 -3.81) (layer "F.SilkS")
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp d2d95741-6472-472f-a122-af46e5b3cf1e)
+  )
+  (fp_text value "C_Trimmer_D6.0mm_P5.08mm" (at 2.54 3.81) (layer "F.Fab")
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp cf54a19f-df20-40c4-b607-9e9b6e59df62)
+  )
+  (fp_text user "${REFERENCE}" (at 2.54 0) (layer "F.Fab")
+      (effects (font (size 1 1) (thickness 0.15)))
+    (tstamp a48c2b86-828a-47b7-b460-858c8edb8fa3)
+  )
+  (fp_line (start 0 -2) (end 0 -1.45)
+    (stroke (width 0.12) (type solid)) (layer "F.SilkS") (tstamp aeb15265-176e-4d30-8533-5075736bad84))
+  (fp_line (start 0 2) (end 0 1.45)
+    (stroke (width 0.12) (type solid)) (layer "F.SilkS") (tstamp 44a0a837-dc7c-4d4e-9c7f-633d09a7f3f6))
+  (fp_line (start 1.846154 -2.769231) (end 0 -2)
+    (stroke (width 0.12) (type solid)) (layer "F.SilkS") (tstamp 4dd4070e-3269-412f-92f9-e54c58055458))
+  (fp_line (start 1.846154 2.769231) (end 0 2)
+    (stroke (width 0.12) (type solid)) (layer "F.SilkS") (tstamp 31557724-9d13-44b3-9602-915f01b00b79))
+  (fp_arc (start 1.846154 -2.769231) (mid 4.061723 -2.805841) (end 5.698053 -1.311682)
+    (stroke (width 0.12) (type solid)) (layer "F.SilkS") (tstamp fb00adb4-9026-4cd2-afdd-5140bb6fe17c))
+  (fp_arc (start 5.698053 1.311682) (mid 4.061723 2.805841) (end 1.846154 2.769231)
+    (stroke (width 0.12) (type solid)) (layer "F.SilkS") (tstamp 865bfa4c-a608-4941-9945-b806bb325ce4))
+  (fp_line (start 0 -2) (end 1.846154 -2.769231)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp a0cc36cc-a547-488c-8ae4-a12fee3114a3))
+  (fp_line (start 0 -1.45) (end 0 -2)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 99556141-c29b-4e8a-9c4d-aff9765ca37b))
+  (fp_line (start 0 2) (end 0 1.45)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 29bef816-99e0-41e6-a92e-1d1c0a2c6150))
+  (fp_line (start 1.846154 2.769231) (end 0 2)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 345f2bcb-3ce9-4cd3-a59c-b6b53cf6bf9c))
+  (fp_arc (start 0 1.45) (mid -1.45 0) (end 0 -1.45)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 8a192f0d-76e3-4a8b-93f0-c4653177cecd))
+  (fp_arc (start 1.846154 -2.769231) (mid 4.061723 -2.805841) (end 5.698053 -1.311682)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 42077596-7275-4297-bb37-909dbaa0ca3c))
+  (fp_arc (start 5.698053 -1.311682) (mid 6.53 0) (end 5.698053 1.311682)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 6ba44ac1-8b79-4dd3-b77f-bcb32f12d3e3))
+  (fp_arc (start 5.698053 1.311682) (mid 4.061723 2.805841) (end 1.846154 2.769231)
+    (stroke (width 0.05) (type solid)) (layer "F.CrtYd") (tstamp 89e5aa35-0855-4c44-be4a-374bf62a9121))
+  (fp_line (start 0 -2) (end 1.846154 -2.769231)
+    (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 06b180af-9dc4-4738-b0d9-c62c73414cb0))
+  (fp_line (start 0 2) (end 0 -2)
+    (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 51afcb1f-f887-4728-9ad8-5e1b769a438d))
+  (fp_line (start 1.846154 2.769231) (end 0 2)
+    (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 704afc38-327c-4336-ae78-fddadc4fd02c))
+  (fp_arc (start 1.846154 -2.769231) (mid 6 0) (end 1.846154 2.769231)
+    (stroke (width 0.1) (type solid)) (layer "F.Fab") (tstamp 0f59ccff-2362-45a7-a04c-e1f478f9326c))
+  (pad "1" thru_hole circle (at 0 0) (size 2.5 2.5) (drill 1.25) (layers "*.Cu" "*.Mask") (tstamp 2d839da3-3356-457b-89c3-ed39e4769c6e))
+  (pad "2" thru_hole circle (at 5.08 0) (size 2.5 2.5) (drill 1.25) (layers "*.Cu" "*.Mask") (tstamp bf51f132-4f87-420d-9b93-e350bfbe7370))
+  (group "" (id 6a52c228-7d5e-4adf-b48b-130bdb8b689f)
+    (members
+      31557724-9d13-44b3-9602-915f01b00b79
+      44a0a837-dc7c-4d4e-9c7f-633d09a7f3f6
+      4dd4070e-3269-412f-92f9-e54c58055458
+      865bfa4c-a608-4941-9945-b806bb325ce4
+      aeb15265-176e-4d30-8533-5075736bad84
+      fb00adb4-9026-4cd2-afdd-5140bb6fe17c
+    )
+  )
+  (group "" (id ae989b99-3859-47b9-a89b-83816ffaaf64)
+    (members
+      29bef816-99e0-41e6-a92e-1d1c0a2c6150
+      345f2bcb-3ce9-4cd3-a59c-b6b53cf6bf9c
+      42077596-7275-4297-bb37-909dbaa0ca3c
+      6ba44ac1-8b79-4dd3-b77f-bcb32f12d3e3
+      89e5aa35-0855-4c44-be4a-374bf62a9121
+      8a192f0d-76e3-4a8b-93f0-c4653177cecd
+      99556141-c29b-4e8a-9c4d-aff9765ca37b
+      a0cc36cc-a547-488c-8ae4-a12fee3114a3
+    )
+  )
+  (group "" (id 6cd75a92-4b16-45e7-8278-463e9f23edc7)
+    (members
+      06b180af-9dc4-4738-b0d9-c62c73414cb0
+      0f59ccff-2362-45a7-a04c-e1f478f9326c
+      51afcb1f-f887-4728-9ad8-5e1b769a438d
+      704afc38-327c-4336-ae78-fddadc4fd02c
+    )
+  )
+  (model "${KICAD6_3DMODEL_DIR}/Capacitor_THT.3dshapes/CP_Radial_Tantal_D6.0mm_P5.00mm.wrl"
+    (offset (xyz 0 0 0))
+    (scale (xyz 1 1 1))
+    (rotate (xyz 0 0 0))
+  )
+)
