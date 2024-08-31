@@ -24,7 +24,7 @@ The LM1881 sync separator (U5) uses the composite video signal to generate a bur
 
 U3 uses the composite video signal and the burst gate signal to generate a subcarrier frequency synchronized to the colorburst of the composite video signal. This subcarrier signal is then passed to the FSC input of U2.
 
-The SAA4960/61 comb filter (U2) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input anti-alias low pass filter. This circuit outputs a filtered luminance and chrominance signals and a delayed composite video passthrough signal. Those signals are then fed to the output amplifiers built using bipolar transistors.
+The SAA4960/61 comb filter (U2) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal. Those signals are then fed to the output amplifiers built using bipolar transistors.
 
 Each output amplifier is built from two BC548 NPN transistors and a BC558 PNP transistor. The output signals from the SAA4960/61 are DC-biased by around 1V, so DC decoupling capacitors are not required to properly DC-bias the base of the transistors. This allows the signal black level to stay at the same voltage regardless of what is being displayed.
 
