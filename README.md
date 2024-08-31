@@ -36,8 +36,16 @@ Assembled prototype:
 Completed, operating device in enclosure:
 ![Completed device](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/IMG_20240814_220529.JPG)
 
-Image comparison on a monochrome display - with and without comb filter:
-![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/Comparison.JPG)
+### Image comparison on a monochrome display - no filter, LC filter and comb filter
+
+1. No filter - luminance detail is preserved, but dot crawl is visible:
+![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/1-No-Filter.JPG)
+
+2. LC filter - Dot crawl is removed, but luminance loses some detail:
+![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/2-LC-Filter.JPG)
+
+3. Comb Filter - Dot crawl is removed and luminance detail is preserved:
+![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/3-Comb-Filter.JPG)
 
 ## LEDs
 
