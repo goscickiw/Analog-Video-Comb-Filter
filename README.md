@@ -1,5 +1,5 @@
 # Analog-Video-Comb-Filter
-Analog Composite Video to S-Video comb filter board using SAA4960 or SAA4961 integrated circuit
+Analog Composite Video to S-Video comb filter board using SAA4960, SAA4961 or SAA4963 integrated circuit
 
 ## **WARNING**
 **This project uses end-of-life components that are no longer manufactured. If you want to build this, make sure that you can obtain all components before starting. Used or new-old-stock parts can sometimes be found online.**
@@ -14,17 +14,19 @@ When using the SAA4960 integrated circuit, PAL B, D, G, H and I systems are supp
 
 SAA4961 provides aditional support for PAL M, N and NTSC M systems.
 
+When using the SAA4963 integrated circuit, only the NTSC M system is supported.
+
 The board is designed to fit inside a KRADEX Z-76 enclosure.
 
 ### Circuit description
 
-A composite video signal is fed in through an RCA connector. The signal is terminated with a 75 ohm resistor and fed to U2, U3 and U5 through 100 nF capacitors.
+A composite video signal is fed in through an RCA connector. The signal is terminated with a 75 ohm resistor and fed to U2 (or U6), U3 and U5 through 100 nF capacitors.
 
 The LM1881 sync separator (U5) uses the composite video signal to generate a burst gate signal. The burst gate signal passes through a 74HC04 inverter (U4) to the MC44144 subcarrier PLL (U3).
 
-U3 uses the composite video signal and the burst gate signal to generate a subcarrier frequency synchronized to the colorburst of the composite video signal. This subcarrier signal is then passed to the FSC input of U2.
+U3 uses the composite video signal and the burst gate signal to generate a subcarrier frequency synchronized to the colorburst of the composite video signal. This subcarrier signal is then passed to the FSC input of U2/U6.
 
-The SAA4960/61 comb filter (U2) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal. Those signals are then fed to the output amplifiers built using bipolar transistors.
+The SAA4960/61/63 comb filter (U2 or U6) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal (when using SAA4963, the CVBYP jumper has to be shorted to allow composite video passthrough). Those signals are then fed to the output amplifiers built using bipolar transistors.
 
 Each output amplifier is built from two BC548 NPN transistors and a BC558 PNP transistor. The output signals from the SAA4960/61 are DC-biased by around 1V, so DC decoupling capacitors are not required to properly DC-bias the base of the transistors. This allows the signal black level to stay at the same voltage regardless of what is being displayed.
 
@@ -57,7 +59,7 @@ D2 shows that the comb filter is operating (U2 is in COMB mode). I'm not sure if
 
 ### Standard selection jumpers (SYS1, SYS2)
 
-SAA4961 only. When using SAA4960, SYS1 and SYS2 jumpers should be left open.
+SAA4961 only. When using SAA4960, SYS1 and SYS2 jumpers should be left open. When using SAA4963, the jumpers are not connected.
 
 Appropriate crystal for the subcarrier oscillator should be installed depending on the jumper setting. If the standard is going to be changed frequently, it may be possible to install a socket for the crystal, however it should be taken into account that MC44144 is sensitive to additional capacitance at the crystal.
 
@@ -77,13 +79,24 @@ The SAA4960 and SAA4961 integrated circuits have a built-in low-pass filter on t
 | Open  | Filter enabled  |
 | Short | Filter disabled |
 
+### Composite video passthrough jumper (CVBYP)
+
+SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided for composite video passthrough. In order for it to work properly, additional DC-biasing resistors will have to be connected to the base of Q9.
+
+| CVBYP | Usage                                                                                                                   |
+| ----- | ----------------------------------------------------------------------------------------------------------------------- |
+| Open  | When using SAA4960 or SAA4961. No additional resistors required.                                                        |
+| Short | When using SAA4963. Add 4,7 kΩ resistor between base of Q9 and ground, and 18 kΩ resistor between base of Q9 and +12VA. |
+
 ## Adjustment
 
-After assembly, including setting the jumpers and installing the correct crystal depending on the analog video standard, the variable capacitor C24 will have to be adjusted so that MC44144 properly locks onto the subcarrier. Use the following procedure for adjustment:
+After assembly, including setting the jumpers and installing the correct crystal depending on the analog video standard, the variable capacitor C21 will have to be adjusted so that MC44144 properly locks onto the subcarrier. Use the following procedure for adjustment:
 
-1. Set C24 to minimum capacitance, then slowly increase capacitance until the PLL locks on. Mark that position.
-2. Set C24 to maximum capacitance, then slowly decrease capacitance until the PLL locks on. Mark that position.
-3. Set C24 to a value between the two positions.
+1. Connect an EBU color bar signal source to the composite video input.
+2. Connect an oscilloscope to U2 pin 14 (luminance output). When PLL is properly locked, the signal will be stable and the amount of residual chrominance will be minimal. When PLL is not locked, unstable residual chrominance will be present. As an alternative, you can use an S-Video display - when PLL is locked the image will be stable.
+3. Set C24 to minimum capacitance, then slowly increase capacitance until the PLL locks on. Mark that position.
+4. Set C24 to maximum capacitance, then slowly decrease capacitance until the PLL locks on. Mark that position.
+5. Set C24 to a value between the two positions.
 
 C24 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
 
@@ -139,13 +152,13 @@ C24 will have to be readjusted if the crystal and the standard selection jumper 
 
 ### Integrated circuits
 
-| Model              | Package | Qty |
-| ------------------ | ------- | --- |
-| L7805              | TO220   | 1   |
-| SAA4960 or SAA4961 | DIP28   | 1   |
-| MC44144            | DIP8    | 1   |
-| 74HC04             | DIP14   | 1   |
-| LM1881             | DIP8    | 1   |
+| Model                         | Package                               | Qty |
+| ----------------------------- | ------------------------------------- | --- |
+| L7805                         | TO220                                 | 1   |
+| SAA4960 or SAA4961 or SAA4963 | DIP28 (SAA4960/61) or DIP20 (SAA4963) | 1   |
+| MC44144                       | DIP8                                  | 1   |
+| 74HC04                        | DIP14                                 | 1   |
+| LM1881                        | DIP8                                  | 1   |
 
 ### Other
 
