@@ -94,11 +94,11 @@ After assembly, including setting the jumpers and installing the correct crystal
 
 1. Connect an EBU color bar signal source to the composite video input.
 2. Connect an oscilloscope to U2 pin 14 (luminance output). When PLL is properly locked, the signal will be stable and the amount of residual chrominance will be minimal. When PLL is not locked, unstable residual chrominance will be present. As an alternative, you can use an S-Video display - when PLL is locked the image will be stable.
-3. Set C24 to minimum capacitance, then slowly increase capacitance until the PLL locks on. Mark that position.
-4. Set C24 to maximum capacitance, then slowly decrease capacitance until the PLL locks on. Mark that position.
-5. Set C24 to a value between the two positions.
+3. Set C21 to minimum capacitance, then slowly increase capacitance until the PLL locks on. Mark that position.
+4. Set C21 to maximum capacitance, then slowly decrease capacitance until the PLL locks on. Mark that position.
+5. Set C21 to a value between the two positions.
 
-C24 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
+C21 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
 
 ## Parts list
 
