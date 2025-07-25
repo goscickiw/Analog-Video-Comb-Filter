@@ -81,11 +81,12 @@ The SAA4960 and SAA4961 integrated circuits have a built-in low-pass filter on t
 
 After assembly, including setting the jumpers and installing the correct crystal depending on the analog video standard, the variable capacitor C24 will have to be adjusted so that MC44144 properly locks onto the subcarrier. Use the following procedure for adjustment:
 
-1. Connect an EBU color bar signal source to the composite video input.
-2. Connect an oscilloscope to U2 pin 14 (luminance output). When PLL is properly locked, the signal will be stable and the amount of residual chrominance will be minimal. When PLL is not locked, unstable residual chrominance will be present. As an alternative, you can use an S-Video display - when PLL is locked the image will be stable.
-3. Set C24 to minimum capacitance, then slowly increase capacitance until the PLL locks on. Mark that position.
-4. Set C24 to maximum capacitance, then slowly decrease capacitance until the PLL locks on. Mark that position.
-5. Set C24 to a value between the two positions.
+1. Connect an EBU (for PAL) or SMPTE (for NTSC) color bar signal source to the composite video input.
+2. Connect an oscilloscope probe, preferably in 10x mode for higher impedance, to U3 pin 3 (phase detector output loop filter).
+3. Adjust C24 until a stable 2.5 V DC voltage is obtained. When this is acheved, the PLL is correctly adjusted.
+4. If C24 has no position where the voltage is stable, measure the frequency at U3 pin 1 (FSC output).
+5. If the maximum frequency you can obtain by adjusting C24 is lower than desired, replace C24 with a lower minimum value variable capacitor, then go back to step 3.
+6. If the minimum frequency is higher than desired, replace C24 with a higher maximum value variable capacitor, or add additional capacitance in parallel, then go back to step 3.
 
 C24 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
 
