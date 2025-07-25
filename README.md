@@ -83,7 +83,7 @@ After assembly, including setting the jumpers and installing the correct crystal
 
 1. Connect an EBU (for PAL) or SMPTE (for NTSC) color bar signal source to the composite video input.
 2. Connect an oscilloscope probe, preferably in 10x mode for higher impedance, to U3 pin 3 (phase detector output loop filter).
-3. Adjust C24 until a stable 2.5 V DC voltage is obtained. When this is acheved, the PLL is correctly adjusted.
+3. Adjust C24 until a stable 2.5 V DC voltage is obtained. When this is achieved, the PLL is correctly adjusted.
 4. If C24 has no position where the voltage is stable, measure the frequency at U3 pin 1 (FSC output).
 5. If the maximum frequency you can obtain by adjusting C24 is lower than desired, replace C24 with a lower minimum value variable capacitor, then go back to step 3.
 6. If the minimum frequency is higher than desired, replace C24 with a higher maximum value variable capacitor, or add additional capacitance in parallel, then go back to step 3.
