@@ -6,7 +6,7 @@ Analog Composite Video to S-Video comb filter board using SAA4960, SAA4961 or SA
 
 ## Description
 
-This is a fully analog alternative to digital comb filters such as Extron YCS Transcoder or YCS 100. That doesn't mean it will give better results though. I just made it because I didn't find any fully analog device like that on the market and I wanted one.
+This is a fully analog alternative to digital comb filters such as Extron YCS Transcoder or YCS 100. [That doesn't mean it will give better results though](#image-comparison-on-a-monochrome-display---no-filter-lc-filter-and-comb-filters). I just made it because I didn't find any fully analog device like that on the market and I wanted one.
 
 The comb filter is used to convert a composite video signal into an S-Video (Y/C) signal. Comb filters are much better than passive LC filters usually built into composite video displays, as they can preserve the frequencies of luminance that overlap with chrominance, providing higher image detail while removing dot crawl, and remove those overlapping luminance frequencies from the chrominance signal which reduces color artifacts.
 
@@ -28,32 +28,37 @@ U3 uses the composite video signal and the burst gate signal to generate a subca
 
 The SAA4960/61/63 comb filter (U2 or U6) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal (when using SAA4963, the CVBYP jumper has to be shorted to allow composite video passthrough). Those signals are then fed to the output amplifiers built using bipolar transistors.
 
-Each output amplifier is built from two BC548 NPN transistors and a BC558 PNP transistor. The output signals from the SAA4960/61 are DC-biased by around 1V, so DC decoupling capacitors are not required to properly DC-bias the base of the transistors. This allows the signal black level to stay at the same voltage regardless of what is being displayed.
+Each output amplifier is built from two BC548 NPN transistors and a BC558 PNP transistor. The output signals from the SAA4960/61 are DC-biased by around 1V, so DC decoupling capacitors are not required to properly DC-bias the base of the transistors. This allows the signal blanking level to stay at the same voltage regardless of what is being displayed.
 
 ## Pictures
 
-Assembled prototype:
-![Assembled prototype](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/IMG_20240814_213257.JPG)
+| Assembled prototype                                             | Completed, operating device in enclosure                     |
+| --------------------------------------------------------------- | ------------------------------------------------------------ |
+| ![Assembled prototype](pictures/photos/IMG_20240814_213257.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
 
-Completed, operating device in enclosure:
-![Completed device](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/IMG_20240814_220529.JPG)
+### Image comparison on a monochrome display - no filter, LC filter and comb filters
 
-### Image comparison on a monochrome display - no filter, LC filter and comb filter
+| No filter                                                              | LC filter                                                               |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| luminance detail is preserved, but dot crawl is visible.               | Dot crawl is mostly removed, but luminance loses some sharpness.        |
+| ![No filter](pictures/comparison/a/1-no-filter.png)                    | ![LC filter](pictures/comparison/a/2-lc-filter.png)                     |
 
-1. No filter - luminance detail is preserved, but dot crawl is visible:
-![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/1-No-Filter.JPG)
-
-2. LC filter - Dot crawl is removed, but luminance loses some detail:
-![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/2-LC-Filter.JPG)
-
-3. Comb Filter - Dot crawl is removed and luminance detail is preserved:
-![Comparison](https://github.com/goscickiw/Analog-Video-Comb-Filter/blob/main/pictures/3-Comb-Filter.JPG)
+| Analog comb filter                                                     | Digital comb filter (for comparison)                                    |
+| ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Dot crawl is mostly removed and luminance sharpness is preserved.      | More effective at removing dot crawl than the analog comb filter.       |
+| ![Analog comb filter](pictures/comparison/a/3-comb-filter-analog.png)  | ![Digital comb filter](pictures/comparison/a/4-comb-filter-digital.png) |
 
 ## LEDs
 
 D1 shows that the device is receiving power.
 
-D2 shows that the comb filter is operating (U2 is in COMB mode). I'm not sure if U2 will ever *not* be in COMB mode when used in this circuit, so this LED might be unnecessary.
+D2 shows that the comb filter is operating (U2 is in COMB mode). I'm not sure if U2 will ever *not* be in COMB mode when used in this circuit, so this LED might be unnecessary. SAA4963 does not have the output needed by this LED, so if it is used, then R30, Q10, D2 and R32 can be left unpopulated.
+
+## REFDL filter capacitors
+
+When using SAA4960 or SAA4961, install C28 and C30, and leave C34 and C35 unpopulated.
+
+When using SAA4963, install C34 and C35, and leave C28 and C30 unpopulated.
 
 ## Solder jumper settings
 
@@ -72,7 +77,7 @@ Appropriate crystal for the subcarrier oscillator should be installed depending 
 
 ### Low pass filter jumper (LPF)
 
-The SAA4960 and SAA4961 integrated circuits have a built-in low-pass filter on the composite video input. This filter can be disabled by shorting the LPF jumper, but it's recommended to leave it on.
+The SAA4960, SAA4961 and SAA4963 integrated circuits have a built-in low-pass filter on the composite video input. With SAA4960 and SAA4961, this filter can be disabled by shorting the LPF jumper, but it's recommended to leave it on. With SAA4963, the jumper is not connected and the filter is always on.
 
 | LPF   | Filter mode     |
 | ----- | --------------- |
@@ -94,12 +99,22 @@ After assembly, including setting the jumpers and installing the correct crystal
 
 1. Connect an EBU (for PAL) or SMPTE (for NTSC) color bar signal source to the composite video input.
 2. Connect an oscilloscope probe, preferably in 10x mode for higher impedance, to U3 pin 3 (phase detector output loop filter).
-3. Adjust C24 until a stable 2.5 V DC voltage is obtained. When this is achieved, the PLL is correctly adjusted.
+3. Adjust C24 until a stable beat waveform[^1] (pictured below) with 2.5 V DC offset is obtained. When this is achieved, the PLL is correctly adjusted.
 4. If C24 has no position where the voltage is stable, measure the frequency at U3 pin 1 (FSC output).
-5. If the maximum frequency you can obtain by adjusting C24 is lower than desired, replace C24 with a lower minimum value variable capacitor, then go back to step 3.
-6. If the minimum frequency is higher than desired, replace C24 with a higher maximum value variable capacitor, or add additional capacitance in parallel, then go back to step 3.
+5. If the maximum frequency you can obtain by adjusting C24 is lower than the correct subcarrier frequency, replace C24 with a lower minimum value variable capacitor, then go back to step 3.
+6. If the minimum frequency is higher than the correct subcarrier frequency, replace C24 with a higher maximum value variable capacitor, or add additional capacitance in parallel, then go back to step 3.
 
 C21 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
+
+| Correctly adjusted, locked                                                 | Incorrectly adjusted, not locked                                            |
+| -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| ![Correctly adjusted](pictures/waveforms/pal_loopfilter_waveform_good.png) | ![Incorrectly adjusted](pictures/waveforms/pal_loopfilter_waveform_bad.png) |
+
+[^1]: I So far I have only tested it with PAL, but presumably with NTSC this waveform would instead appear as a stable DC voltage, due to NTSC not using a swinging burst.
+
+## Known issues
+
+1. If the device connected to an output has the load resistor connected through a capacitor (such configuration is present in PVM-1454QM chrominance input for example), then the signal can become malformed. I am planning to redesign the output circuit to resolve this.
 
 ## Parts list
 
