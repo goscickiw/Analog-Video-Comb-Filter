@@ -86,12 +86,12 @@ The SAA4960, SAA4961 and SAA4963 integrated circuits have a built-in low-pass fi
 
 ### Composite video passthrough jumper (CVBYP)
 
-SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided for composite video passthrough. In order for it to work properly, additional DC-biasing resistors will have to be connected to the base of Q9.
+SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided for composite video passthrough. When the jumper is shorted, the video signal for Q9 is taken from the composite video input of SAA4963. The DC bias is provided by the clamping circuit inside SAA4963. It may be necessary to use a larger value R25 resistor to reduce the load on the clamping circuit. This configuration has not been tested and may not work correctly. Leave the jumper open if shorting it causes issues for the comb filter.
 
-| CVBYP | Usage                                                                                                                   |
-| ----- | ----------------------------------------------------------------------------------------------------------------------- |
-| Open  | When using SAA4960 or SAA4961. No additional resistors required.                                                        |
-| Short | When using SAA4963. Add 4,7 kΩ resistor between base of Q9 and ground, and 18 kΩ resistor between base of Q9 and +12VA. |
+| CVBYP | Usage                          |
+| ----- | ------------------------------ |
+| Open  | When using SAA4960 or SAA4961. |
+| Short | When using SAA4963.            |
 
 ## Adjustment
 
