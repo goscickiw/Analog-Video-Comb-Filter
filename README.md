@@ -20,52 +20,62 @@ The board is designed to fit inside a KRADEX Z-76 enclosure.
 
 ### Circuit description
 
-A composite video signal is fed in through an RCA connector. The signal is terminated with a 75 ohm resistor and fed to U3 (or U7), U4 and U6 through 100 nF capacitors.
+![Circuit diagram](pictures/Analog-Video-Comb-Filter.svg)
+
+A composite video signal is fed in through an RCA connector (J4). The signal is terminated with a 75 ohm resistor and fed to U3 (or U7), U4 and U6 through 100 nF capacitors.
 
 The LM1881 sync separator (U6) uses the composite video signal to generate a burst gate signal. The burst gate signal passes through a 74HC04 inverter (U5) to the MC44144 subcarrier PLL (U4).
 
 U4 uses the composite video signal and the burst gate signal to generate a subcarrier frequency synchronized to the colorburst of the composite video signal. This subcarrier signal is then passed to the FSC input of U3/U7.
 
-The SAA4960/61/63 comb filter (U3 or U7) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal (when using SAA4963, the CVBYP jumper has to be shorted to allow composite video passthrough). Those signals are then fed to the output amplifiers.
+The SAA4960/61/63 comb filter (U3 or U7) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal (when using SAA4963, the CVBYP jumper has to be shorted to allow non-delayed composite video passthrough). Those signals are then fed to the output amplifiers.
 
-AD8044 quad op-amp (U2) is used for the output amplifiers. A rail-to-rail op-amp was chosen to allow single-supply operation without issues. Because the output signals from the SAA4960/61 are DC-biased by around 1V, some non-rail-to-rail op-amps may also be viable, but I have not tested any. The footprint is a standard quad op-amp layout. AD813-like[^1] triple op-amps with enable inputs on pins 1, 2 and 3 can also be used with "ALT" jumper shorted. The gain is set to 2x, in order to drive a 75 ohm load through a 75 ohm back-termination series resistor.
+A quad or triple op-amp (U2) is used for the output amplifiers. The output signals from the SAA4960/61[^1] are DC-biased by around 1V, so non-rail-to-rail op-amps like the AD813 are viable, but in case of issues use a rail-to-rail op-amp like the AD8044. The footprint is a standard quad op-amp layout. To use a triple op-amp layout with enable pins like the AD813, short the "ALT" jumper. The gain is set to 2x, in order to drive a 75 ohm load through a 75 ohm back-termination series resistor.
+
+Op-amps that have been tested in this circuit:
+
+| Model                   | Result                          |
+| ----------------------- | ------------------------------- |
+| AD813                   | OK                              |
+| AD8044                  | OK, higher crosstalk than AD813 |
+| BA10324A (LM324 equiv.) | Not viable, too slow            |
 
 ## Pictures
 
-| Assembled prototype (rev2)                                | Completed, operating device in enclosure                     |
-| --------------------------------------------------------- | ------------------------------------------------------------ |
+| Assembled prototype (rev2)                           | Completed, operating device in enclosure                     |
+| ---------------------------------------------------- | ------------------------------------------------------------ |
 | ![Assembled prototype](pictures/photos/IMG_0103.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
 
 ### Image comparison - no filter, LC filter and comb filters
 
 <table>
   <tr>
-  	<th width="50%">No filter</th>
-  	<th width="50%">LC filter</th>
+    <th width="50%">No filter</th>
+    <th width="50%">LC filter</th>
   </tr>
   <tr>
-  	<td>Luminance detail is preserved, but dot crawl is visible across the entire picture.</td>
-  	<td>Dot crawl is mostly removed, but luminance loses some sharpness, and higher frequency luminance components (responsible for sharpness) are left in chrominance causing color artifacts.</td>
+    <td>Luminance detail is preserved, but dot crawl is visible across the entire picture.</td>
+    <td>Dot crawl is mostly removed, but luminance loses some sharpness, and higher frequency luminance components (responsible for sharpness) are left in chrominance causing color artifacts.</td>
   </tr>
   <tr>
-  	<td><img src="pictures/comparison/color/1-no-filter.png"></td>
-  	<td><img src="pictures/comparison/color/2-lc-filter.png"></td>
+    <td><img src="pictures/comparison/color/1-no-filter.png"></td>
+    <td><img src="pictures/comparison/color/2-lc-filter.png"></td>
   </tr>
   <tr>
     <td></td>
     <td></td>
   </tr>
   <tr>
-  	<th>This analog comb filter</th>
-  	<th>MC141627 digital comb filter (for comparison, Extron YCS transcoder)</th>
+    <th>This analog comb filter</th>
+    <th>MC141627 digital comb filter (for comparison, Extron YCS transcoder)</th>
   </tr>
   <tr>
-  	<td>Dot crawl is mostly removed and luminance sharpness is mostly preserved. Higher frequency luminance components are properly separated from chrominance.</td>
-  	<td>More effective than the analog comb filter.</td>
+    <td>Dot crawl is mostly removed and luminance sharpness is mostly preserved. Higher frequency luminance components are properly separated from chrominance.</td>
+    <td>More effective than the analog comb filter.</td>
   </tr>
   <tr>
-  	<td><img src="pictures/comparison/color/3-comb-filter-analog.png"></td>
-  	<td><img src="pictures/comparison/color/4-comb-filter-digital.png"></td>
+    <td><img src="pictures/comparison/color/3-comb-filter-analog.png"></td>
+    <td><img src="pictures/comparison/color/4-comb-filter-digital.png"></td>
   </tr>
 </table>
 
@@ -73,32 +83,32 @@ AD8044 quad op-amp (U2) is used for the output amplifiers. A rail-to-rail op-amp
   <summary>Monochrome image comparison</summary>
   <table>
     <tr>
-    	<th width="50%">No filter</th>
-    	<th width="50%">LC filter</th>
+      <th width="50%">No filter</th>
+      <th width="50%">LC filter</th>
     </tr>
     <tr>
-    	<td>Luminance detail is preserved, but dot crawl is visible in colored sections.</td>
-    	<td>Dot crawl is mostly removed, but luminance loses some sharpness.</td>
+      <td>Luminance detail is preserved, but dot crawl is visible in colored sections.</td>
+      <td>Dot crawl is mostly removed, but luminance loses some sharpness.</td>
     </tr>
     <tr>
-    	<td><img src="pictures/comparison/monochrome/1-no-filter.png"></td>
-    	<td><img src="pictures/comparison/monochrome/2-lc-filter.png"></td>
+      <td><img src="pictures/comparison/monochrome/1-no-filter.png"></td>
+      <td><img src="pictures/comparison/monochrome/2-lc-filter.png"></td>
     </tr>
     <tr>
       <td></td>
       <td></td>
     </tr>
     <tr>
-    	<th>This analog comb filter</th>
-    	<th>MC141627 digital comb filter (for comparison, Extron YCS transcoder)</th>
+      <th>This analog comb filter</th>
+      <th>MC141627 digital comb filter (for comparison, Extron YCS transcoder)</th>
     </tr>
     <tr>
-    	<td>Dot crawl is mostly removed and luminance sharpness is mostly preserved.</td>
-    	<td>More effective than the analog comb filter.</td>
+      <td>Dot crawl is mostly removed and luminance sharpness is mostly preserved.</td>
+      <td>More effective than the analog comb filter.</td>
     </tr>
     <tr>
-    	<td><img src="pictures/comparison/monochrome/3-comb-filter-analog.png"></td>
-    	<td><img src="pictures/comparison/monochrome/4-comb-filter-digital.png"></td>
+      <td><img src="pictures/comparison/monochrome/3-comb-filter-analog.png"></td>
+      <td><img src="pictures/comparison/monochrome/4-comb-filter-digital.png"></td>
     </tr>
   </table>
 </details>
@@ -141,7 +151,9 @@ The SAA4960, SAA4961 and SAA4963 integrated circuits have a built-in low-pass fi
 
 ### Composite video passthrough jumper (CVBYP)
 
-SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided for composite video passthrough. When the jumper is shorted, the video signal for Q9 is taken from the composite video input of SAA4963. The DC bias is provided by the clamping circuit inside SAA4963. Do not install R12 to avoid additional load to the clamping circuit. This configuration has not been tested and may not work correctly. Leave the jumper open if shorting it causes issues for the comb filter.
+SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided for composite video passthrough. When the jumper is shorted, the video signal for composite video output is taken from pin 13 (composite video input) of SAA4963. The DC bias for the output amplifier is provided by the clamping circuit inside SAA4963. Do not install R12 to avoid additional load to the clamping circuit. This configuration has not been tested and may not work correctly. Leave the jumper open if shorting it causes issues for the comb filter.
+
+**WARNING: This jumper must never be shorted if using SAA4960/61.**
 
 | CVBYP | Usage                          |
 | ----- | ------------------------------ |
@@ -150,10 +162,10 @@ SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided 
 
 ### ALT jumper ###
 
-| ALT   | Usage                                                                                               |
-| ----- | --------------------------------------------------------------------------------------------------- |
-| Open  | When using a quad op-amp with AD8044-like layout.                                                   |
-| Short | When using a triple op-amp with AD813-like[^1] layout to connect the enable pins to supply voltage. |
+| ALT   | Usage                                                                                                                            | Example op-amp |
+| ----- | -------------------------------------------------------------------------------------------------------------------------------- | -------------- |
+| Open  | When using a quad op-amp with standard layout.                                                                                   | AD8044         |
+| Short | When using a triple op-amp where pins 1, 2, 3 are enable pins,<br/>and the rest is the same as in a standard quad op-amp layout. | AD813          |
 
 ## Adjustment
 
@@ -222,7 +234,7 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 | Model                         | Package                               | Qty |
 | ----------------------------- | ------------------------------------- | --- |
 | L7805                         | TO220                                 | 1   |
-| AD8044                        | DIP14                                 | 1   |
+| AD813 or AD8044               | DIP14                                 | 1   |
 | SAA4960 or SAA4961 or SAA4963 | DIP28 (SAA4960/61) or DIP20 (SAA4963) | 1   |
 | MC44144                       | DIP8                                  | 1   |
 | 74HC04                        | DIP14                                 | 1   |
@@ -242,6 +254,6 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 
 This work is licensed under CC BY-SA 4.0 license.
 
-[^1]: This is only an alternative layout option, I have yet to actually test if the DC bias is sufficient for AD813.
+[^1]: SAA4963 has not been tested as I don't have one yet.
 
 [^2]: I So far I have only tested it with PAL, but presumably with NTSC this waveform would instead appear as a stable DC voltage, due to NTSC not using a swinging burst.
