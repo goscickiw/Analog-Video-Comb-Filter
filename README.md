@@ -38,29 +38,69 @@ AD8044 quad op-amp (U2) is used for the output amplifiers. A rail-to-rail op-amp
 
 ### Image comparison - no filter, LC filter and comb filters
 
-| No filter                                                                          | LC filter                                                                                                                                                                               |
-| ---------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| luminance detail is preserved, but dot crawl is visible across the entire picture. | Dot crawl is mostly removed, but luminance loses some sharpness, and higher frequency luminance components (responsible for sharpness) are left in chrominance causing color artifacts. |
-| ![No filter](pictures/comparison/color/1-no-filter.png)                            | ![LC filter](pictures/comparison/color/2-lc-filter.png)                                                                                                                                 |
-
-| This analog comb filter                                                                                                                                 | MC141627 digital comb filter (for comparison, Extron YCS transcoder)        |
-| ------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| Dot crawl is mostly removed and luminance sharpness is mostly preserved. Higher frequency luminance components are properly separated from chrominance. | More effective than the analog comb filter.                                 |
-| ![Analog comb filter](pictures/comparison/color/3-comb-filter-analog.png)                                                                               | ![Digital comb filter](pictures/comparison/color/4-comb-filter-digital.png) |
+<table>
+  <tr>
+  	<th width="50%">No filter</th>
+  	<th width="50%">LC filter</th>
+  </tr>
+  <tr>
+  	<td>Luminance detail is preserved, but dot crawl is visible across the entire picture.</td>
+  	<td>Dot crawl is mostly removed, but luminance loses some sharpness, and higher frequency luminance components (responsible for sharpness) are left in chrominance causing color artifacts.</td>
+  </tr>
+  <tr>
+  	<td><img src="pictures/comparison/color/1-no-filter.png"></td>
+  	<td><img src="pictures/comparison/color/2-lc-filter.png"></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+  	<th>This analog comb filter</th>
+  	<th>MC141627 digital comb filter (for comparison, Extron YCS transcoder)</th>
+  </tr>
+  <tr>
+  	<td>Dot crawl is mostly removed and luminance sharpness is mostly preserved. Higher frequency luminance components are properly separated from chrominance.</td>
+  	<td>More effective than the analog comb filter.</td>
+  </tr>
+  <tr>
+  	<td><img src="pictures/comparison/color/3-comb-filter-analog.png"></td>
+  	<td><img src="pictures/comparison/color/4-comb-filter-digital.png"></td>
+  </tr>
+</table>
 
 <details>
-<summary>Monochrome image comparison</summary>
-
-| No filter                                                                    | LC filter                                                        |
-| ---------------------------------------------------------------------------- | ---------------------------------------------------------------- |
-| luminance detail is preserved, but dot crawl is visible in colored sections. | Dot crawl is mostly removed, but luminance loses some sharpness. |
-| ![No filter](pictures/comparison/monochrome/1-no-filter.png)                 | ![LC filter](pictures/comparison/monochrome/2-lc-filter.png)     |
-
-| This analog comb filter                                                        | Digital comb filter (for comparison, Extron YCS transcoder)                      |
-| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
-| Dot crawl is mostly removed and luminance sharpness is mostly preserved.       | More effective than the analog comb filter.                                      |
-| ![Analog comb filter](pictures/comparison/monochrome/3-comb-filter-analog.png) | ![Digital comb filter](pictures/comparison/monochrome/4-comb-filter-digital.png) |
-
+  <summary>Monochrome image comparison</summary>
+  <table>
+    <tr>
+    	<th width="50%">No filter</th>
+    	<th width="50%">LC filter</th>
+    </tr>
+    <tr>
+    	<td>Luminance detail is preserved, but dot crawl is visible in colored sections.</td>
+    	<td>Dot crawl is mostly removed, but luminance loses some sharpness.</td>
+    </tr>
+    <tr>
+    	<td><img src="pictures/comparison/monochrome/1-no-filter.png"></td>
+    	<td><img src="pictures/comparison/monochrome/2-lc-filter.png"></td>
+    </tr>
+    <tr>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+    	<th>This analog comb filter</th>
+    	<th>MC141627 digital comb filter (for comparison, Extron YCS transcoder)</th>
+    </tr>
+    <tr>
+    	<td>Dot crawl is mostly removed and luminance sharpness is mostly preserved.</td>
+    	<td>More effective than the analog comb filter.</td>
+    </tr>
+    <tr>
+    	<td><img src="pictures/comparison/monochrome/3-comb-filter-analog.png"></td>
+    	<td><img src="pictures/comparison/monochrome/4-comb-filter-digital.png"></td>
+    </tr>
+  </table>
 </details>
 
 ## LEDs
