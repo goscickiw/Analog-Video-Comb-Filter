@@ -5,8 +5,8 @@
   (paper "A4")
 
   (title_block
-    (title "SAA4960 / SAA4961 Analog Video Comb Filter")
-    (date "2026-02-14")
+    (title "SAA4960 / SAA4961 / SAA4963 Analog Video Comb Filter")
+    (date "2026-02-21")
     (rev "2")
     (company "github.com/goscickiw")
   )
@@ -4162,7 +4162,7 @@
   )
 
   (symbol (lib_id "Device:C_Polarized") (at 267.97 154.94 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 05034c24-96e3-440a-85c8-0137ee3aff42)
     (property "Reference" "C32" (at 265.43 153.67 0)
       (effects (font (size 1.27 1.27)) (justify right))
@@ -5247,7 +5247,7 @@
   )
 
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 182.88 151.13 270) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 3da9fb26-88e0-418d-82e1-eb93c6bd3624)
     (property "Reference" "JP4" (at 181.61 149.86 90)
       (effects (font (size 1.27 1.27)) (justify right))
@@ -5370,7 +5370,7 @@
   )
 
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 182.88 130.81 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 4491b459-2d70-467b-bec3-091b0ef239e5)
     (property "Reference" "JP2" (at 181.61 129.54 0)
       (effects (font (size 1.27 1.27)) (justify right))
@@ -6216,7 +6216,7 @@
   )
 
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 243.84 151.13 90) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 6782cd93-d565-4d22-b589-aa1a01808c52)
     (property "Reference" "JP5" (at 240.03 151.13 0)
       (effects (font (size 1.27 1.27)))
@@ -6520,7 +6520,7 @@
   )
 
   (symbol (lib_id "Custom_Symbols:SAA4963") (at 260.35 132.08 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no) (fields_autoplaced)
+    (in_bom no) (on_board yes) (dnp no) (fields_autoplaced)
     (uuid 7b2ce7b5-f36f-4c3a-9227-60f1a80ba881)
     (property "Reference" "U7" (at 252.73 115.57 0) (do_not_autoplace)
       (effects (font (size 1.27 1.27)) (justify left))
@@ -7177,7 +7177,7 @@
   )
 
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 88.9 87.63 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid 95b82d42-3840-4782-8ddf-033b44450590)
     (property "Reference" "JP1" (at 88.9 82.55 0)
       (effects (font (size 1.27 1.27)))
@@ -7406,7 +7406,7 @@
   )
 
   (symbol (lib_id "Jumper:SolderJumper_2_Open") (at 182.88 138.43 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid a4af756d-10f0-4d2b-aa49-983e32579675)
     (property "Reference" "JP3" (at 181.61 137.16 0)
       (effects (font (size 1.27 1.27)) (justify right))
@@ -7996,7 +7996,7 @@
     (property "Reference" "R19" (at 182.88 110.49 90)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Value" "2,2k" (at 182.88 113.03 90)
+    (property "Value" "1k" (at 182.88 113.03 90)
       (effects (font (size 1.27 1.27)))
     )
     (property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal" (at 182.88 117.348 90)
@@ -8114,7 +8114,7 @@
   )
 
   (symbol (lib_id "Device:C") (at 256.54 154.94 0) (unit 1)
-    (in_bom yes) (on_board yes) (dnp no)
+    (in_bom no) (on_board yes) (dnp no)
     (uuid cb6d958d-e5e2-491c-8079-2bee167c1484)
     (property "Reference" "C31" (at 254 153.67 0)
       (effects (font (size 1.27 1.27)) (justify right))

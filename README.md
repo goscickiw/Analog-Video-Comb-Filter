@@ -32,21 +32,36 @@ AD8044 quad op-amp (U2) is used for the output amplifiers. A rail-to-rail op-amp
 
 ## Pictures
 
-| Assembled prototype                                             | Completed, operating device in enclosure                     |
-| --------------------------------------------------------------- | ------------------------------------------------------------ |
-| ![Assembled prototype](pictures/photos/IMG_20240814_213257.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
+| Assembled prototype (rev2)                                | Completed, operating device in enclosure                     |
+| --------------------------------------------------------- | ------------------------------------------------------------ |
+| ![Assembled prototype](pictures/photos/IMG_0103.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
 
-### Image comparison on a monochrome display - no filter, LC filter and comb filters
+### Image comparison - no filter, LC filter and comb filters
 
-| No filter                                                              | LC filter                                                               |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| luminance detail is preserved, but dot crawl is visible.               | Dot crawl is mostly removed, but luminance loses some sharpness.        |
-| ![No filter](pictures/comparison/a/1-no-filter.png)                    | ![LC filter](pictures/comparison/a/2-lc-filter.png)                     |
+| No filter                                                                 | LC filter                                                                   |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| luminance detail is preserved, but dot crawl is visible.                  | Dot crawl is mostly removed, but luminance loses some sharpness.            |
+| ![No filter](pictures/comparison/color/1-no-filter.png)                   | ![LC filter](pictures/comparison/color/2-lc-filter.png)                     |
 
-| Analog comb filter                                                     | Digital comb filter (for comparison)                                    |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------- |
-| Dot crawl is mostly removed and luminance sharpness is preserved.      | More effective at removing dot crawl than the analog comb filter.       |
-| ![Analog comb filter](pictures/comparison/a/3-comb-filter-analog.png)  | ![Digital comb filter](pictures/comparison/a/4-comb-filter-digital.png) |
+| This analog comb filter                                                   | Digital comb filter (for comparison, Extron YCS transcoder)                 |
+| ------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
+| Dot crawl is mostly removed and luminance sharpness is preserved.         | More effective at removing dot crawl than the analog comb filter.           |
+| ![Analog comb filter](pictures/comparison/color/3-comb-filter-analog.png) | ![Digital comb filter](pictures/comparison/color/4-comb-filter-digital.png) |
+
+<details>
+<summary>Monochrome image comparison</summary>
+
+| No filter                                                                      | LC filter                                                                        |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| luminance detail is preserved, but dot crawl is visible.                       | Dot crawl is mostly removed, but luminance loses some sharpness.                 |
+| ![No filter](pictures/comparison/monochrome/1-no-filter.png)                   | ![LC filter](pictures/comparison/monochrome/2-lc-filter.png)                     |
+
+| This analog comb filter                                                        | Digital comb filter (for comparison, Extron YCS transcoder)                      |
+| ------------------------------------------------------------------------------ | -------------------------------------------------------------------------------- |
+| Dot crawl is mostly removed and luminance sharpness is preserved.              | More effective at removing dot crawl than the analog comb filter.                |
+| ![Analog comb filter](pictures/comparison/monochrome/3-comb-filter-analog.png) | ![Digital comb filter](pictures/comparison/monochrome/4-comb-filter-digital.png) |
+
+</details>
 
 ## LEDs
 
@@ -125,9 +140,7 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 | ---------- | ------ | --- |
 | 47 Ω       | 0,25 W | 1   |
 | 75 Ω       | 0,25 W | 4   |
-| 560 Ω      | 0,25 W | 6   |
-| 1 kΩ       | 0,25 W | 8   |
-| 2,2 kΩ     | 0,25 W | 1   |
+| 1 kΩ       | 0,25 W | 9   |
 | 4,7 kΩ     | 0,25 W | 1   |
 | 10 kΩ      | 0,25 W | 4   |
 | 47 kΩ      | 0,25 W | 1   |
@@ -146,9 +159,9 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 
 | Capacitance | Voltage | Pin pitch | Diameter | Qty |
 | ----------- | ------- | --------- | -------- | --- |
+| 220 μF      | ≥ 16 V  | 2,5 mm    | 6,3 mm   | 2   |
 | 100 μF      | ≥ 6,3 V | 2 mm      | 5 mm     | 6   |
 | 100 μF      | ≥ 16 V  | 2 mm      | 5 mm     | 1   |
-| 220 μF      | ≥ 16 V  | 2,5 mm    | 6,3 mm   | 2   |
 
 ### Inductors
 

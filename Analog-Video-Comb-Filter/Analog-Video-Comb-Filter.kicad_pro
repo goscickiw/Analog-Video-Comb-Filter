@@ -220,10 +220,7 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [
-      "pin_to_pin|2501900|1397000|28cadec5-8da0-4aa7-9e65-90b5b7fab623|79875d52-ae8d-4794-b22a-9575268ce31b|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d",
-      "pin_to_pin|2705100|1422400|33c04dc3-e292-4609-bf56-b6ce71da36dd|4159c38a-8fb3-4797-9288-270ed5c724b5|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d"
-    ],
+    "erc_exclusions": [],
     "meta": {
       "version": 0
     },
@@ -579,7 +576,7 @@
     },
     "net_format_name": "",
     "page_layout_descr_file": "",
-    "plot_directory": "../documentation/",
+    "plot_directory": "../pdf/",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,
