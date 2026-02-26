@@ -42,9 +42,9 @@ Op-amps that have been tested in this circuit:
 
 ## Pictures
 
-| Assembled prototype (rev2)                           | Completed, operating device in enclosure                     |
+| Assembled rev.2 devices (PAL and NTSC)               | Completed, operating device in enclosure                     |
 | ---------------------------------------------------- | ------------------------------------------------------------ |
-| ![Assembled prototype](pictures/photos/IMG_0103.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
+| ![Assembled prototype](pictures/photos/IMG_0106.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
 
 ### Image comparison - no filter, LC filter and comb filters
 
@@ -169,20 +169,64 @@ SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided 
 
 ## Adjustment
 
-After assembly, including setting the jumpers and installing the correct crystal depending on the analog video standard, the variable capacitor C17 will have to be adjusted so that MC44144 properly locks onto the subcarrier. Use the following procedure for adjustment:
+After assembly, including setting the jumpers and installing the correct crystal depending on the analog video standard, the variable capacitor C17 will have to be adjusted so that the PLL locks correctly to the color subcarrier and the loop control voltage is centered.
 
-1. Connect an EBU (for PAL) or SMPTE (for NTSC) color bar signal source to the composite video input.
-2. Connect an oscilloscope probe, preferably in 10x mode for higher impedance, to U4 pin 3 (phase detector output loop filter).
-3. Adjust C17 until a stable beat waveform[^2] (pictured below) with 2.5 V DC offset is obtained. When this is achieved, the PLL is correctly adjusted.
-4. If C17 has no position where the voltage is stable, measure the frequency at U4 pin 1 (FSC output).
-5. If the maximum frequency you can obtain by adjusting C17 is lower than the correct subcarrier frequency, replace C17 with a lower minimum value variable capacitor, then go back to step 3.
-6. If the minimum frequency is higher than the correct subcarrier frequency, replace C17 with a higher maximum value variable capacitor, or add additional capacitance in parallel, then go back to step 3.
+Use the following procedure for adjustment:
+
+1. Connect an EBU (for PAL) or SMPTE (for NTSC) color bar signal from a good quality reference source to the composite video input.
+2. Connect a 10x oscillososcope probe to U4 pin 3 (phase detector output loop filter). Use AC coupling, 200 mV/div vertical scale, and 100 µs/div timebase.
+3. Here are the reference pictures needed for the following steps:
+
+<details>
+  <summary>PAL waveforms</summary>
+  <table>
+    <tr>
+      <th width="33%">Not locked</th>
+      <th width="33%">Locked, not adjusted</th>
+      <th width="33%">Best adjustment</th>
+    </tr>
+    <tr>
+      <td><img src="pictures/waveforms/pal-bad.png"></td>
+      <td><img src="pictures/waveforms/pal-locked-high.png"><br/><img src="pictures/waveforms/pal-locked-low.png"></td>
+      <td><img src="pictures/waveforms/pal-good.png"></td>
+    </tr>
+  </table>
+</details>
+
+<details>
+  <summary>NTSC waveforms</summary>
+  <table>
+    <tr>
+      <th width="33%">Not locked</th>
+      <th width="33%">Locked, not adjusted</th>
+      <th width="33%">Best adjustment</th>
+    </tr>
+    <tr>
+      <td><img src="pictures/waveforms/ntsc-bad.png"></td>
+      <td><img src="pictures/waveforms/ntsc-locked-high.png"><br/><img src="pictures/waveforms/ntsc-locked-low.png"></td>
+      <td><img src="pictures/waveforms/ntsc-good.png"></td>
+    </tr>
+  </table>
+</details>
+
+4. Follow the flow chart below:
+
+```mermaid
+flowchart LR
+  A{Able to obtain **&quot;Best&nbsp;adjustment&quot;** by adjusting C17?} -- Yes --> B([PLL correctly adjusted.]);
+  A -->|No| C{"PLL able to lock (one of **&quot;Locked,&nbsp;not&nbsp;adjusted&quot;** waveforms)?"};
+  C -->|Yes| D{Does waveform resemble the **top** or **bottom** picture in **&quot;Locked,&nbsp;not&nbsp;adjusted&quot;**?};
+  C -->|No| E["Measure frequency at U4 pin 1 (FSC output), and adjust C17 to get as close as possible to required frequency."];
+  E --> F{Is the frequency higher or lower than required?};
+  F -->|Higher| G[replace C17 with a higher max. value trim capacitor, or add a parallel capacitor.];
+  F -->|Lower| H[replace C17 with a lower min. value trim capacitor.];
+  D -->|Top| G;
+  D -->|Bottom| H;
+  G --> I[Adjust C17 and observe the waveform at U4 pin 3.] --> A;
+  H --> I;
+```
 
 C17 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
-
-| Correctly adjusted, locked                                                 | Incorrectly adjusted, not locked                                            |
-| -------------------------------------------------------------------------- | --------------------------------------------------------------------------- |
-| ![Correctly adjusted](pictures/waveforms/pal_loopfilter_waveform_good.png) | ![Incorrectly adjusted](pictures/waveforms/pal_loopfilter_waveform_bad.png) |
 
 ## Parts list
 
@@ -198,22 +242,17 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 | 47 kΩ      | 0,25 W | 1   |
 | 680 kΩ     | 0,25 W | 1   |
 
-### Ceramic and MLCC capacitors 
+### Capacitors
 
-| Capacitance | Pin pitch | Type             | Qty |
-| ----------- | --------- | ---------------- | --- |
-| 4-20 pF     | 5,08 mm   | Ceramic variable | 1   |
-| 470 pF      | 2,5 mm    | Ceramic          | 1   |
-| 1 nF        | 5 mm      | Ceramic          | 1   |
-| 100 nF      | 2,5 mm    | Ceramic          | 18  |
-
-### Electrolytic capacitors
-
-| Capacitance | Voltage | Pin pitch | Diameter | Qty |
-| ----------- | ------- | --------- | -------- | --- |
-| 220 μF      | ≥ 16 V  | 2,5 mm    | 6,3 mm   | 2   |
-| 100 μF      | ≥ 6,3 V | 2 mm      | 5 mm     | 6   |
-| 100 μF      | ≥ 16 V  | 2 mm      | 5 mm     | 1   |
+| Capacitance | Pin pitch | Type                       | Qty |
+| ----------- | --------- | -------------------------- | --- |
+| 4-20 pF     | 5,08 mm   | Ceramic variable           | 1   |
+| 470 pF      | 2,5 mm    | Ceramic                    | 1   |
+| 1 nF        | 5 mm      | Ceramic                    | 1   |
+| 100 nF      | 2,5 mm    | Ceramic                    | 18  |
+| 100 μF      | 2 mm      | Electrolytic, ≥6,3V, ⌀5mm  | 6   |
+| 100 μF      | 2 mm      | Electrolytic, ≥16V, ⌀5mm   | 1   |
+| 220 μF      | 2,5 mm    | Electrolytic, ≥16V, ⌀6,3mm | 2   |
 
 ### Inductors
 
