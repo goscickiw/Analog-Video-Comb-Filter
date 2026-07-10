@@ -34,9 +34,9 @@
         "other_text_thickness": 0.15,
         "other_text_upright": false,
         "pads": {
-          "drill": 0.0,
-          "height": 0.5,
-          "width": 1.0
+          "drill": 0.8,
+          "height": 1.5,
+          "width": 1.5
         },
         "silk_line_width": 0.15,
         "silk_text_italic": false,
@@ -56,6 +56,7 @@
         }
       ],
       "drc_exclusions": [
+        "lib_footprint_mismatch|133845875|78850000|c0830ec0-742b-4bcf-8d9f-fa96ded08911|00000000-0000-0000-0000-000000000000",
         "pth_inside_courtyard|152400000|101600000|91564449-004a-4069-9605-4490c70dcc57|281eb470-d20f-4c15-b443-fa4bbe5d0434",
         "pth_inside_courtyard|152400000|104140000|05b3c4fe-dcae-4eb7-9125-39585c797147|281eb470-d20f-4c15-b443-fa4bbe5d0434",
         "pth_inside_courtyard|152400000|106680000|d85e335e-1bbf-4e8c-8be7-dcd4bc6e2c48|281eb470-d20f-4c15-b443-fa4bbe5d0434",
@@ -220,7 +221,10 @@
     "equivalence_files": []
   },
   "erc": {
-    "erc_exclusions": [],
+    "erc_exclusions": [
+      "pin_to_pin|1409700|1460500|79875d52-ae8d-4794-b22a-9575268ce31b|28cadec5-8da0-4aa7-9e65-90b5b7fab623|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d",
+      "pin_to_pin|1409700|1511300|4159c38a-8fb3-4797-9288-270ed5c724b5|33c04dc3-e292-4609-bf56-b6ce71da36dd|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d|/6f7fa11e-654f-4988-a085-8bac964d6c7d"
+    ],
     "meta": {
       "version": 0
     },
@@ -576,7 +580,7 @@
     },
     "net_format_name": "",
     "page_layout_descr_file": "",
-    "plot_directory": "../pdf/",
+    "plot_directory": "../pictures/",
     "spice_current_sheet_as_root": false,
     "spice_external_command": "spice \"%I\"",
     "spice_model_current_sheet_as_root": true,

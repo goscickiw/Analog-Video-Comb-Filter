@@ -30,21 +30,13 @@ U4 uses the composite video signal and the burst gate signal to generate a subca
 
 The SAA4960/61/63 comb filter (U3 or U7) is fed with the composite video signal and the synchronized subcarrier signal. The jumpers SYS1 and SYS2 set the video standard, and the jumper LPF can be used to disable the input low-pass filter. This circuit outputs filtered luminance and chrominance signals and a delayed composite video passthrough signal (when using SAA4963, the CVBYP jumper has to be shorted to allow non-delayed composite video passthrough). Those signals are then fed to the output amplifiers.
 
-A quad or triple op-amp (U2) is used for the output amplifiers. The output signals from the SAA4960/61[^1] are DC-biased by around 1V, so non-rail-to-rail op-amps like the AD813 are viable, but in case of issues use a rail-to-rail op-amp like the AD8044. The footprint is a standard quad op-amp layout. To use a triple op-amp layout with enable pins like the AD813, short the "ALT" jumper. The gain is set to 2x, in order to drive a 75 ohm load through a 75 ohm back-termination series resistor.
-
-Op-amps that have been tested in this circuit:
-
-| Model                   | Result                          |
-| ----------------------- | ------------------------------- |
-| AD813                   | OK                              |
-| AD8044                  | OK, higher crosstalk than AD813 |
-| BA10324A (LM324 equiv.) | Not viable, too slow            |
+The AD813 triple op-amp (U2) is used for the output amplifiers. The output signals from the SAA4960/61[^1] are DC-biased by around 1V, so a non-rail-to-rail op-amp like the AD813 is viable. The gain can be adjusted from approx. 1,5x to 2,5x with RV1, RV2 and RV3.
 
 ## Pictures
 
 | Assembled rev.2 devices (PAL and NTSC)               | Completed, operating device in enclosure                     |
 | ---------------------------------------------------- | ------------------------------------------------------------ |
-| ![Assembled prototype](pictures/photos/IMG_0106.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
+| ![Assembled devices](pictures/photos/IMG_0106.JPG) | ![Completed device](pictures/photos/IMG_20240814_220529.JPG) |
 
 ### Image comparison - no filter, LC filter and comb filters
 
@@ -160,13 +152,6 @@ SAA4963 doesn't have a composite video output, so the CVBYP jumper was provided 
 | Open  | When using SAA4960 or SAA4961. |
 | Short | When using SAA4963.            |
 
-### ALT jumper ###
-
-| ALT   | Usage                                                                                                                            | Example op-amp |
-| ----- | -------------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| Open  | When using a quad op-amp with standard layout.                                                                                   | AD8044         |
-| Short | When using a triple op-amp where pins 1, 2, 3 are enable pins,<br/>and the rest is the same as in a standard quad op-amp layout. | AD813          |
-
 ## Adjustment
 
 After assembly, including setting the jumpers and installing the correct crystal depending on the analog video standard, the variable capacitor C17 will have to be adjusted so that the PLL locks correctly to the color subcarrier and the loop control voltage is centered.
@@ -226,7 +211,36 @@ flowchart LR
   H --> I;
 ```
 
-C17 will have to be readjusted if the crystal and the standard selection jumper settings are changed.
+5. Set RV1, RV2, RV3 to center position. Connect the luminance, chrominance and composite outputs to an oscilloscope with 75 ohm load resistance. Luminance signal is preferred for oscilloscope trigger. Adjust RV1, RV2, RV3 to obtain the following:
+
+<table>
+  <tr>
+    <th>Output</th>
+    <th>Adjustment</th>
+    <th>Measured value</th>
+    <th>PAL</th>
+    <th>NTSC</th>
+  </tr>
+  <tr>
+    <td>Chrominance</td>
+    <td>RV1</td>
+    <td>Peak-peak <b>colorburst</b></td>
+    <td>300 mV</td>
+    <td>285,72 mV</td>
+  </tr>
+  <tr>
+    <td>Luminance</td>
+    <td>RV2</td>
+    <td rowspan=2>Peak-peak voltage<br/>(sync level to 100% white level)</td>
+    <td rowspan=2 colspan=2>1 V</td>
+  </tr>
+  <tr>
+    <td>Composite</td>
+    <td>RV3</td>
+  </tr>
+</table>
+
+Readjustment is necessary if the crystal and the standard selection jumper settings are changed.
 
 ## Parts list
 
@@ -236,7 +250,8 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 | ---------- | ------ | --- |
 | 47 Ω       | 0,25 W | 1   |
 | 75 Ω       | 0,25 W | 4   |
-| 1 kΩ       | 0,25 W | 9   |
+| 470 Ω      | 0,25 W | 3   |
+| 1 kΩ       | 0,25 W | 6   |
 | 4,7 kΩ     | 0,25 W | 1   |
 | 10 kΩ      | 0,25 W | 4   |
 | 47 kΩ      | 0,25 W | 1   |
@@ -283,6 +298,7 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 
 | Type               | Model                           | Qty |
 | ------------------ | ------------------------------- | --- |
+| Potentiometer      | PIHER PT10LH-1K                 | 3   |
 | Crystal            | HC-49U, depends on video system | 1   |
 | RCA Connector      | Keystone Electronics 973        | 2   |
 | Mini-DIN Connector | MDC-204, unshielded             | 1   |
@@ -294,5 +310,3 @@ C17 will have to be readjusted if the crystal and the standard selection jumper 
 This work is licensed under CC BY-SA 4.0 license.
 
 [^1]: SAA4963 has not been tested as I don't have one yet.
-
-[^2]: I So far I have only tested it with PAL, but presumably with NTSC this waveform would instead appear as a stable DC voltage, due to NTSC not using a swinging burst.

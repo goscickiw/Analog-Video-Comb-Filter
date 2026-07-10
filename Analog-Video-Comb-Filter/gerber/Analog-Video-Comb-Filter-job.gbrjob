@@ -5,13 +5,13 @@
       "Application": "Pcbnew",
       "Version": "7.0.6"
     },
-    "CreationDate": "2026-02-21T14:29:19+01:00"
+    "CreationDate": "2026-02-28T13:59:23+01:00"
   },
   "GeneralSpecs": {
     "ProjectId": {
       "Name": "Analog-Video-Comb-Filter",
       "GUID": "416e616c-6f67-42d5-9669-64656f2d436f",
-      "Revision": "2"
+      "Revision": "3"
     },
     "Size": {
       "X": 51.55,
