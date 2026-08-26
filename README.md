@@ -198,9 +198,9 @@ Use the following procedure for adjustment:
 
 ```mermaid
 flowchart LR
-  A{Able to obtain **&quot;Best&nbsp;adjustment&quot;** by adjusting C17?} -- Yes --> B([PLL correctly adjusted.]);
-  A -->|No| C{"PLL able to lock (one of **&quot;Locked,&nbsp;not&nbsp;adjusted&quot;** waveforms)?"};
-  C -->|Yes| D{Does waveform resemble the **top** or **bottom** picture in **&quot;Locked,&nbsp;not&nbsp;adjusted&quot;**?};
+  A{Able to obtain waveform shown in <b>Best&nbsp;adjustment</b> by adjusting C17?} -- Yes --> B([PLL correctly adjusted.]);
+  A -->|No| C{"PLL able to lock (one of <b>Locked,&nbsp;not&nbsp;adjusted</b> waveforms)?"};
+  C -->|Yes| D{Does waveform resemble the <b>top</b> or <b>bottom</B> picture in <b>Locked,&nbsp;not&nbsp;adjusted</b>?};
   C -->|No| E["Measure frequency at U4 pin 1 (FSC output), and adjust C17 to get as close as possible to required frequency."];
   E --> F{Is the frequency higher or lower than required?};
   F -->|Higher| G[replace C17 with a higher max. value trim capacitor, or add a parallel capacitor.];
